@@ -22,6 +22,14 @@ class _RegisterPageState
   final _passwordEC = TextEditingController();
 
   @override
+  void dispose() {
+    _nameEC.dispose();
+    _emailEC.dispose();
+    _passwordEC.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: VakinhaAppbar(
