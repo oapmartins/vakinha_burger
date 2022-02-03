@@ -31,7 +31,8 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(
-                            'http://conteudo.imguol.com.br/c/entretenimento/8c/2018/04/18/fast-food-lanche-1524056858988_v2_1183x887.jpg'),
+                          'http://dartweek.academiadoflutter.com.br/images${controller.product.image}',
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -40,7 +41,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
-                      'X Tudo',
+                      controller.product.name,
                       style: context.textTheme.headline4!.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -50,17 +51,20 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Text(
-                      'X Tudo',
+                      controller.product.description,
                       style: context.textTheme.bodyText2,
                     ),
                   ),
                   const SizedBox(height: 20),
-                  PlusMinusBox(
-                    minusCallBack: () {},
-                    plusCallBack: () {},
-                    price: 6.00,
-                    quantity: 1,
-                    label: 'X TUDAO',
+                  Obx(
+                    () {
+                      return PlusMinusBox(
+                        plusCallBack: () => controller.addProduct(),
+                        minusCallBack: () => controller.removeProduct(),
+                        price: controller.product.price,
+                        quantity: controller.quantity,
+                      );
+                    },
                   ),
                   const Divider(),
                   ListTile(
@@ -68,10 +72,12 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                       'Total',
                       style: VakinhaUI.textBold,
                     ),
-                    trailing: Text(
-                      FormatterHelper.formatCurrency(200),
-                      style: VakinhaUI.textBold,
-                    ),
+                    trailing: Obx(() {
+                      return Text(
+                        FormatterHelper.formatCurrency(controller.totalPrice),
+                        style: VakinhaUI.textBold,
+                      );
+                    }),
                   ),
                   const SizedBox(height: 20),
                   Center(

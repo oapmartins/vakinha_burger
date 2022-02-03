@@ -64,11 +64,15 @@ class PlusMinusBox extends StatelessWidget {
                 ),
               ],
             ),
-            Spacer(),
+            Visibility(
+              visible: label == null,
+              child: Spacer(),
+            ),
             Container(
               margin: EdgeInsets.only(left: 20, right: 20),
               constraints: BoxConstraints(minWidth: 70),
-              child: Text(FormatterHelper.formatCurrency(calculateTotal ? price * quantity : price)),
+              child: Text(FormatterHelper.formatCurrency(
+                  calculateTotal ? price * quantity : price)),
             ),
           ],
         ),
