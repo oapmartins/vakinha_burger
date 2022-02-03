@@ -7,9 +7,10 @@
 
 <h2>🛠️ Funcionalidades e Tecnologias Estudadas</h2>
 
+- Pagamento por PIX
 - GetX como Gerenciamento de Estado
-- Fluxo de Login e Logout com a aplicação
 - Navigator 2.0
+- Fluxo de Login e Logout com a aplicação
 - Themes
 
 - Telas: 
