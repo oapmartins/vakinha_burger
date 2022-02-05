@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vakinha_burger/app/core/ui/formatter_helper.dart';
 import 'package:vakinha_burger/app/core/ui/widgets/plus_minus_box.dart';
 import 'package:vakinha_burger/app/core/ui/widgets/vakinha_appbar.dart';
+import 'package:vakinha_burger/app/core/ui/widgets/vakinha_button.dart';
 import 'package:validatorless/validatorless.dart';
 import './shopping_car_controller.dart';
 
@@ -46,6 +47,7 @@ class ShoppingCarPage extends GetView<ShoppingCarController> {
                       ),
                     ),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
                           margin: EdgeInsets.all(10),
@@ -83,8 +85,20 @@ class ShoppingCarPage extends GetView<ShoppingCarController> {
                         ),
                         const Divider(),
                         _AdressField(),
-                        Divider(),
+                        const Divider(),
                         _CpfField(),
+                        const Divider(),
+                        // const Spacer(),
+                        Center(
+                          child: SizedBox(
+                            width: context.widthTransformer(reducedBy: 10),
+                            child: VakinhaButton(
+                              onpressed: () {},
+                              label: 'FINALIZAR',
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ],
@@ -108,23 +122,25 @@ class _CpfField extends GetView<ShoppingCarController> {
         horizontal: 20,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             height: 35,
-            child: Expanded(
-              child: Text(
-                'Endereço de entrega',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 18),
-              ),
+            child: Text(
+              'CPF',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 18),
             ),
           ),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
             onChanged: (value) {},
-            validator: Validatorless.required('Endereço Obrigatório'),
+            validator: Validatorless.multiple([
+              Validatorless.required('CPF Obrigatório'),
+              Validatorless.cpf('CPF inválido'),
+            ]),
             decoration: InputDecoration(
-              hintText: 'Digite o endereço',
+              hintText: 'Digite o CPF',
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.grey,
@@ -145,17 +161,16 @@ class _AdressField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             height: 35,
-            child: Expanded(
-              child: Text(
-                'Endereço de entrega',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 18),
-              ),
+            child: Text(
+              'Endereço de entrega',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 18),
             ),
           ),
           TextFormField(
