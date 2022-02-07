@@ -2,13 +2,14 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:vakinha_burger/app/core/ui/formatter_helper.dart';
 import 'package:vakinha_burger/app/core/ui/widgets/plus_minus_box.dart';
-import 'package:vakinha_burger/app/core/ui/widgets/vakinha_appbar.dart';
 import 'package:vakinha_burger/app/core/ui/widgets/vakinha_button.dart';
 import 'package:validatorless/validatorless.dart';
 import './shopping_car_controller.dart';
 
 class ShoppingCarPage extends GetView<ShoppingCarController> {
-  const ShoppingCarPage({Key? key}) : super(key: key);
+  final formKey = GlobalKey<FormState>();
+
+  ShoppingCarPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class ShoppingCarPage extends GetView<ShoppingCarController> {
               ),
               child: IntrinsicHeight(
                 child: Form(
+                  key: formKey,
                   child: Visibility(
                     visible: controller.products.isNotEmpty,
                     replacement: Column(
@@ -125,7 +127,11 @@ class ShoppingCarPage extends GetView<ShoppingCarController> {
                             width: context.widthTransformer(reducedBy: 10),
                             child: VakinhaButton(
                               onpressed: () {
-                                Get.toNamed('/orders/finished');
+                                final formValid =
+                                    formKey.currentState?.validate() ?? false;
+                                if (formValid) {
+                                  controller.createOrder();
+                                }
                               },
                               label: 'FINALIZAR',
                             ),
