@@ -15,53 +15,78 @@ class ShoppingCarPage extends GetView<ShoppingCarController> {
     return Scaffold(
       body: LayoutBuilder(
         builder: (_, constrains) {
-          return ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: constrains.maxHeight,
-              minWidth: constrains.maxWidth,
-            ),
-            child: IntrinsicHeight(
-              child: Form(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Carrinho',
-                            style: context.textTheme.headline6?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: context.theme.primaryColorDark,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.delete_forever,
-                              color: Colors.red,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constrains.maxHeight,
+                minWidth: constrains.maxWidth,
+              ),
+              child: IntrinsicHeight(
+                child: Form(
+                  child: Visibility(
+                    visible: controller.products.isNotEmpty,
+                    replacement: Column(
                       children: [
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          child: PlusMinusBox(
-                            label: 'X salada',
-                            elevated: true,
-                            backgroundColor: Colors.white,
-                            calculateTotal: true,
-                            quantity: 1,
-                            price: 10,
-                            minusCallBack: () {},
-                            plusCallBack: () {},
+                        Text(
+                          'Carrinho',
+                          style: context.textTheme.headline6?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: context.theme.primaryColorDark,
                           ),
                         ),
+                        const SizedBox(height: 10),
+                        const Text('Nenhum item adicionado no carrinho'),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Carrinho',
+                                style: context.textTheme.headline6?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: context.theme.primaryColorDark,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: controller.clear,
+                                icon: Icon(
+                                  Icons.delete_forever,
+                                  color: Colors.red,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Obx(() {
+                          return Column(
+                            children: controller.products
+                                .map(
+                                  (p) => Container(
+                                    margin: EdgeInsets.all(10),
+                                    child: PlusMinusBox(
+                                      label: p.product.name,
+                                      elevated: true,
+                                      backgroundColor: Colors.white,
+                                      calculateTotal: true,
+                                      quantity: p.quantity,
+                                      price: p.product.price,
+                                      plusCallBack: () {
+                                        controller.addQuantityInProduct(p);
+                                      },
+                                      minusCallBack: () {
+                                        controller.subtractQuantityInProduct(p);
+                                      },
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          );
+                        }),
                         const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.all(20.0),
@@ -74,11 +99,17 @@ class ShoppingCarPage extends GetView<ShoppingCarController> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Text(
-                                FormatterHelper.formatCurrency(200),
-                                style: context.textTheme.bodyText1?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Center(
+                                child: Obx(() {
+                                  return Text(
+                                    FormatterHelper.formatCurrency(
+                                        controller.totalValue),
+                                    style:
+                                        context.textTheme.bodyText1?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                }),
                               ),
                             ],
                           ),
@@ -88,12 +119,14 @@ class ShoppingCarPage extends GetView<ShoppingCarController> {
                         const Divider(),
                         _CpfField(),
                         const Divider(),
-                        // const Spacer(),
+                        const Spacer(),
                         Center(
                           child: SizedBox(
                             width: context.widthTransformer(reducedBy: 10),
                             child: VakinhaButton(
-                              onpressed: () {},
+                              onpressed: () {
+                                Get.toNamed('/orders/finished');
+                              },
                               label: 'FINALIZAR',
                             ),
                           ),
@@ -101,7 +134,7 @@ class ShoppingCarPage extends GetView<ShoppingCarController> {
                         const SizedBox(height: 10),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -134,7 +167,9 @@ class _CpfField extends GetView<ShoppingCarController> {
           ),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            onChanged: (value) {},
+            onChanged: (value) {
+              controller.cpf = value;
+            },
             validator: Validatorless.multiple([
               Validatorless.required('CPF Obrigatório'),
               Validatorless.cpf('CPF inválido'),
@@ -155,7 +190,7 @@ class _CpfField extends GetView<ShoppingCarController> {
   }
 }
 
-class _AdressField extends StatelessWidget {
+class _AdressField extends GetView<ShoppingCarController> {
   const _AdressField({Key? key}) : super(key: key);
 
   @override
@@ -175,7 +210,9 @@ class _AdressField extends StatelessWidget {
           ),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            onChanged: (value) {},
+            onChanged: (value) {
+              controller.address = value;
+            },
             validator: Validatorless.required('Endereço Obrigatório'),
             decoration: InputDecoration(
               hintText: 'Digite o endereço',

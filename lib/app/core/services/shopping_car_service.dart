@@ -4,11 +4,19 @@ import 'package:vakinha_burger/app/models/shopping_car_model.dart';
 
 class ShoppingCarService extends GetxService {
   final _shoppingCard = <int, ShoppingCarModel>{}.obs;
+
   List<ShoppingCarModel> get products => _shoppingCard.values.toList();
 
   int get totalProducts => _shoppingCard.values.length;
 
   ShoppingCarModel? getById(int id) => _shoppingCard[id];
+
+  double get totalValue {
+    return _shoppingCard.values.fold(0, (totalValue, shoppingCarModel) {
+      totalValue += shoppingCarModel.product.price * shoppingCarModel.quantity;
+      return totalValue;
+    });
+  }
 
   void addAndRemoveProductInShoppingCard(
     ProductModel product, {
@@ -24,5 +32,9 @@ class ShoppingCarService extends GetxService {
         return ShoppingCarModel(quantity: quantity, product: product);
       });
     }
+  }
+
+  void clear() {
+    _shoppingCard.clear();
   }
 }

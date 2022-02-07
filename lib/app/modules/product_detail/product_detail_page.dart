@@ -90,6 +90,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
