@@ -8,6 +8,7 @@
 <h2>Preview</h2>
 
 <p align="center">
+<<<<<<< HEAD
    <img src=".github/splashPage.png" width="180" alt="Splash Page">
    <img src=".github/login.png" width="180" alt="Tela de Login">
    <img src=".github/cadastro.png" width="180" alt="Tela de Cadastro">
@@ -16,6 +17,16 @@
    <img src=".github/carrinho.png" width="180" alt="Carrinho de Compras">
    <img src=".github/prePix.png" width="180" alt="Tela Pré Pix">
    <img src=".github/pix.png" width="180" alt="Tela do PIX">
+=======
+   <img src=".github/splashPage.png" width="160" alt="Splash Page">
+   <img src=".github/login.png" width="160" alt="Tela de Login">
+   <img src=".github/cadastro.png" width="160" alt="Tela de Cadastro">
+   <img src=".github/menu.png" width="160" alt="Menu">
+   <img src=".github/detalhes.png" width="160" alt="Detalhes dos Produtos">
+   <img src=".github/carrinho.png" width="160" alt="Carrinho de Compras">
+   <img src=".github/prePix.png" width="160" alt="Tela Pré Pix">
+   <img src=".github/pix.png" width="160" alt="Tela do PIX">
+>>>>>>> a0b03b6cb57f7d5e40712d51aa3d5376ce1c5a3a
 </p>
 
 --- 
