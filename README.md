@@ -8,14 +8,14 @@
 <h2>Preview</h2>
 
 <p align="center">
-   <img src=".github/splashPage.png" width="150" alt="Splash Page">
-   <img src=".github/login.png" width="150" alt="Tela de Login">
-   <img src=".github/cadastro.png" width="150" alt="Tela de Cadastro">
-   <img src=".github/menu.png" width="150" alt="Menu">
-   <img src=".github/detalhes.png" width="150" alt="Detalhes dos Produtos">
-   <img src=".github/carrinho.png" width="150" alt="Carrinho de Compras">
-   <img src=".github/prePix.png" width="150" alt="Tela Pré Pix">
-   <img src=".github/pix.png" width="150" alt="Tela do PIX">
+   <img src=".github/splashPage.png" width="180" alt="Splash Page">
+   <img src=".github/login.png" width="180" alt="Tela de Login">
+   <img src=".github/cadastro.png" width="180" alt="Tela de Cadastro">
+   <img src=".github/menu.png" width="180" alt="Menu">
+   <img src=".github/detalhes.png" width="180" alt="Detalhes dos Produtos">
+   <img src=".github/carrinho.png" width="180" alt="Carrinho de Compras">
+   <img src=".github/prePix.png" width="180" alt="Tela Pré Pix">
+   <img src=".github/pix.png" width="180" alt="Tela do PIX">
 </p>
 
 --- 
