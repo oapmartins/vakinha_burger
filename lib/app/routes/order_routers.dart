@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:vakinha_burger/app/modules/order/finished/finished_page.dart';
+import 'package:vakinha_burger/app/modules/order/pix/pix_page.dart';
 
 class OrderRouters {
   OrderRouters._();
@@ -7,7 +8,11 @@ class OrderRouters {
   static final routers = <GetPage>[
     GetPage(
       name: '/orders/finished',
-      page: () => const FinishedPage(),
+      page: () => FinishedPage(),
+    ),
+    GetPage(
+      name: '/orders/pix',
+      page: () => PixPage(),
     ),
   ];
 }

@@ -1,19 +1,19 @@
 
 <h2>Sobre</h2>
 
-- Em construção.
+  Este foi um aplicativo contruído na semana do Dart Week, um evento proporcionado pela <a href="http://academiadoflutter.com.br/">Academia do Flutter</a>. O Vakinha Burguer é um aplicativo de delivery de lanches, com pagamentos com Pix.
 
 ---   
 
 <h2>Preview</h2>
 
 <p align="center">
-   <img src=".github/splashPage.png" width="120" alt="Splash Page">
-   <img src=".github/cadastro.png" width="120" alt="Tela de Cadastro">
-   <img src=".github/menu.png" width="120" alt="Menu">
-   <img src=".github/detalhes.png" width="120" alt="Detalhes dos Produtos">
-   <img src=".github/carrinho.png" width="120" alt="Carrinho de Compras">
-   <img src=".github/pix.png" width="120" alt="Tela do PIX">
+   <img src=".github/splashPage.png" width="130" alt="Splash Page">
+   <img src=".github/cadastro.png" width="130" alt="Tela de Cadastro">
+   <img src=".github/menu.png" width="130" alt="Menu">
+   <img src=".github/detalhes.png" width="130" alt="Detalhes dos Produtos">
+   <img src=".github/carrinho.png" width="130" alt="Carrinho de Compras">
+   <img src=".github/pix.png" width="130" alt="Tela do PIX">
 </p>
 
 --- 
@@ -38,6 +38,8 @@
   - Cadastro (Onde possui o cadastro do usuário)
   - Splash Page (Tela inicial do app para transição)
   - Home (Tela principal do app e que serve de fluxo inicial para as demais telas)
+  - Carrinho (Tela onde os produtos escolhidos estão localizados)
+  - PIX (Tela onde o usuário pode escanear o código e pagar po PIX)
    </p>
 
 
